@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS shopSphere_db;
+
+CREATE DATABASE shopSphere_db;
