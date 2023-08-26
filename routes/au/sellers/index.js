@@ -2,15 +2,16 @@ const router = require('express').Router();
 
 
 
-const { Seller } = require('../../../models/Seller');
+const Seller = require('../../../models/Seller');
 
 // Create seller
 router.post('/create', async (req, res) => {
   try {
       const seller = await Seller.create(req.body);
-      res.status(201).json(seller);
+      res.status(201).json({ message: "Sellers successfully created!", seller });
   } catch (err) {
-      res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
   }
 });
 
@@ -18,9 +19,17 @@ router.post('/create', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
       const sellers = await Seller.findAll();
-      res.json(sellers);
+      if (!sellers.length) {
+        res.status(404).json({ message: "No sellers found." });
+        return;
+    }
+    res.json(sellers);
   } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ 
+        message: "Failed to fetch sellers. Please try again later.",
+        error: err.message 
+  });
+      
   }
 });
 
