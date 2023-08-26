@@ -1,6 +1,8 @@
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
+
 
 class Buyer extends Model {}
 
@@ -35,7 +37,7 @@ Buyer.init({
     hooks: {
       beforeCreate: async (newBuyerData) => {
         newBuyerData.password = await bcrypt.hash(newBuyerData.password, 10);
-        return newSellerData;
+        return newBuyerData;
       },
       beforeUpdate: async (updatedBuyerData) => {
         if (updatedBuyerData.password) {
@@ -45,7 +47,7 @@ Buyer.init({
       },
     },
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'buyer',

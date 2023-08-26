@@ -17,7 +17,8 @@ Product.init({
         allowNull: false,
     },
     price: {
-        type: DataTypes.DECIMAL(10, 2),
+        // the product price can only be less than 100k.
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: false,
     },
     description: {
