@@ -35,6 +35,7 @@ Product.init({
 }, {
     sequelize,
     modelName: 'product',
+    tableName: 'product',  // Explicitly setting the table name
     timestamps: true,
     underscored: true,
 });
