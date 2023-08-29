@@ -1,5 +1,3 @@
-
-
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -17,13 +15,12 @@ Product.init({
         allowNull: false,
     },
     price: {
-        // the product price can only be less than 100k.
         type: DataTypes.DECIMAL(5, 2),
         allowNull: false,
     },
     description: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
     },
     seller_id: {
         type: DataTypes.INTEGER,
@@ -32,10 +29,18 @@ Product.init({
             key: 'id',
         },
     },
+    quantity: {  // Adding the quantity attribute
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,  
+        validate: {
+            min: 1,  
+        }
+    }
 }, {
     sequelize,
     modelName: 'product',
-    tableName: 'product',  // Explicitly setting the table name
+    tableName: 'product',
     timestamps: true,
     underscored: true,
 });

@@ -25,7 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //use routes from './routes'
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
+// change synchronization option to "force:false" before production
+sequelize.sync({ alter: true }).then(() => {
   app.listen(PORT, () =>
     console.log(" Server listening on: http://localhost:" + PORT)
   );
