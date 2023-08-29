@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Seller = require('../../../models/Seller');
-const auth = require(''); //middleware_is_where?
+const auth = require('../../../utils/auth');
+
 
 // Create seller
 router.post('/create', async (req, res) => {
