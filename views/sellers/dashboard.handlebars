@@ -1,0 +1,24 @@
+<header>
+    <h1>Welcome, {{ seller.username }}!</h1>
+</header>
+<nav>
+    <!-- put navigation in -->
+    <ul>
+        <li><a href="/sellers/products">My Products</a></li>
+        <li><a href="/sellers/orders">My Orders</a></li>
+        <li><a href="/sellers/profile">My Profile</a></li>
+        <li><a href="/sellers/logout">Logout</a></li>
+    </ul>
+</nav>
+<main>
+    <section>
+        <h2>Overview</h2>
+        <div>
+            <p>Recent Orders: {{ recentOrdersCount }}</p>
+            <p>Total Earnings: ${{ totalEarnings }}</p>
+        </div>
+    </section>
+    <!-- Further expantion -->
+</main>
+<footer>
+</footer>
