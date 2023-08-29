@@ -53,14 +53,7 @@ router.post('/create', upload.array('productImages', 5), async (req, res) => {
 // Fetch all products details
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.findAll({
-            // include: [{
-            //     model: ProductImage,
-       
-            //     attributes: ['image_url']
-            // }]
-
-         });
+        const products = await Product.findAll();
          
         
         if (!products.length) {
