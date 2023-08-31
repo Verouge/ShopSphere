@@ -1,86 +1,212 @@
 <header class="flex justify-between mt-7 pb-7 bg-white px-4 py-2 shadow">
-        <div class="relative w-64 ml-16">
-            <input type="text" name="search" id="search" placeholder="What can we help you find?"
-                class="pl-10 pr-4 py-2 w-full border rounded-md">
-            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2"></i>
-        </div>
+    <div class="relative w-64 ml-16">
+        <input type="text" name="search" id="search" placeholder="What can we help you find?"
+            class="pl-10 pr-4 py-2 w-full border border-black">
+        <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+    </div>
 
-        <div class="flex">
-            <h1 class="text-2xl font-semibold"><i class="fa-solid fa-shop fa-2xl"></i> | ShopSphere</h1>
-        </div>
-        <div class="flex items-center">
-            <!-- User Profile Icon and Modal Trigger -->
-            <div class="relative group inline-block">
-                <a href="#" class="mx-10" id="profileIcon">
-                    <i class="fa-solid fa-user fa-xl"></i>
-                </a>
+    <div class="flex">
+        <h1 class="text-2xl font-semibold"><i class="fa-solid fa-shop fa-2xl"></i> | ShopSphere</h1>
+    </div>
+    <div class="flex items-center">
+        <!-- User Profile Icon and Modal Trigger -->
+        <div class="relative group inline-block">
+            <a href="#" class="mx-10" id="profileIcon">
+                <i class="fa-solid fa-user fa-xl"></i>
+            </a>
 
-                <!-- The Login Modal -->
-                <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden"
-                    id="loginModal">
-                    <div class="bg-white rounded-lg w-[735px] h-[547px] flex items-center relative justify-evenly">
-
-
-                        <!-- Sign In Section -->
-                        <div class="w-[277px] h-[478px] p-8">
-                            <h2 class="text-2xl mb-4">Sign In</h2>
-                            <form>
-                                <div class="mb-4">
-                                    <label class="block text-sm mb-2" for="username">Email</label>
-                                    <input type="text" id="username" name="username" class="border rounded w-full p-2">
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm mb-2" for="password">Password</label>
-                                    <input type="password" id="password" name="password"
-                                        class="border rounded w-full p-2">
-                                </div>
-                                <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign
-                                    In</button>
-                            </form>
-                        </div>
-
-                        <!-- Divider -->
-                        <div class="w-[2px] h-[305px] bg-gray-200"></div>
-
-                        <!-- Create Account Section -->
-                        <div class="w-[280px] h-[478px] p-8">
-                            <h2 class="text-2xl mb-4">Create Account</h2>
-                            <ul class="list-disc pl-5 mb-4 text-base">
-                                <li>Exclusive member-only deals</li>
-                                <li>Faster checkout process</li>
-                                <li>Save multiple shipping addresses</li>
-                                <li>Access to order history and tracking</li>
-                            </ul>
-                            <a href="#" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
-                        </div>
-
-                        <button id="closeModal" type="button" title="Close Popup" class="absolute top-4 right-4">
-                            <span class="sr-only">Close Popup</span>
-                            <i class="fa-solid fa-times text-2xl"></i>
-                        </button>
+            <!-- The Login Modal -->
+            <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden"
+                id="loginModal">
+                <div class="bg-white rounded-lg w-[735px] h-[547px] flex items-center relative justify-evenly">
 
 
+                    <!-- Sign In Section -->
+                    <div class="w-[277px] h-[478px] p-8">
+                        <h2 class="text-2xl mb-4">Sign In</h2>
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-sm mb-2" for="username">Email</label>
+                                <input type="text" id="username" name="username" class="border rounded w-full p-2">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm mb-2" for="password">Password</label>
+                                <input type="password" id="password" name="password" class="border rounded w-full p-2">
+                            </div>
+                            <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign
+                                In</button>
+                        </form>
                     </div>
-                </div>
-            </div>
 
-            <!-- Group for dropdown -->
-            <div class="relative group inline-block">
-                <a href="" class="mr-16">
-                    <i class="fa-solid fa-cart-shopping fa-xl"></i>
-                </a>
+                    <!-- Divider -->
+                    <div class="w-[2px] h-[305px] bg-gray-200"></div>
 
-                <!-- The dropdown content -->
-                <div
-                    class="absolute right-0 top-full mt-0 w-64 bg-white border border-gray-300 rounded-lg shadow-xl z-10 hidden group-hover:block">
-                    <div class="p-4">
-                        <p class="font-bold text-gray-700">Your Shopping Cart</p>
-                        <p class="text-sm text-gray-500 mt-2">Your cart is currently empty.</p>
+                    <!-- Create Account Section -->
+                    <div class="w-[280px] h-[478px] p-8">
+                        <h2 class="text-2xl mb-4">Create Account</h2>
+                        <ul class="list-disc pl-5 mb-4 text-base">
+                            <li>Exclusive member-only deals</li>
+                            <li>Faster checkout process</li>
+                            <li>Save multiple shipping addresses</li>
+                            <li>Access to order history and tracking</li>
+                        </ul>
+                        <a href="#" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
                     </div>
-                    <div class="border-t p-4">
-                        <a href="#" class="text-blue-500 text-sm hover:underline">View and Edit Cart</a>
-                    </div>
+
+                    <button id="closeModal" type="button" title="Close Popup" class="absolute top-4 right-4">
+                        <span class="sr-only">Close Popup</span>
+                        <i class="fa-solid fa-times text-2xl"></i>
+                    </button>
+
+
                 </div>
             </div>
         </div>
+
+        <!-- Group for dropdown -->
+        <div class="relative group inline-block">
+            <a href="" class="mr-16">
+                <i class="fa-solid fa-cart-shopping fa-xl"></i>
+            </a>
+
+            <!-- The dropdown content -->
+            <div
+                class="absolute right-0 top-full mt-0 w-64 bg-white border border-gray-300 rounded-lg shadow-xl z-10 hidden group-hover:block">
+                <div class="p-4">
+                    <p class="font-bold text-gray-700">Your Shopping Cart</p>
+                    <p class="text-sm text-gray-500 mt-2">Your cart is currently empty.</p>
+                </div>
+                <div class="border-t p-4">
+                    <a href="#" class="text-blue-500 text-sm hover:underline">View and Edit Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
+
+<nav>
+    <div class="bg-black text-white">
+        <div class="container mx-auto py-2">
+            <nav class="flex space-x-6 overflow-x-auto scrollbar-hide justify-evenly">
+                <a href="#" class="hover:text-gray-400">Books</a>
+                <a href="#" class="hover:text-gray-400">Fashion</a>
+                <a href="#" class="hover:text-gray-400">Electronics</a>
+                <a href="#" class="hover:text-gray-400">Home</a>
+                <a href="#" class="hover:text-gray-400">Toys & Games</a>
+                <a href="#" class="hover:text-gray-400">Sports</a>
+                <a href="#" class="hover:text-gray-400">Fitness & Outdoors</a>
+            </nav>
+        </div>
+    </div>
+</nav>
+
+<section class="relative h-[600px] bg-cover bg-center" style="background-image: url('/images/hero-1.jpg');">
+    <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
+
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <h1 class="text-4xl font-bold text-white mb-6">create a harmonious living space</h1>
+        <a href="#" class="bg-black py-2 px-6 text-white font-semibold hover:bg-gray-700">SHOP NOW</a>
+    </div>
+</section>
+
+<section class="flex">
+    <div class="relative w-1/2 bg-cover bg-center"
+        style="background-image: url('/images/electronics.jpg'); height: 500px;">
+        <a href="#"
+            class="absolute top-4 right-4 text-white text-3xl font-semibold transition-transform transform hover:scale-110">ELECTRONICS</a>
+    </div>
+
+    <div class="relative w-1/2 bg-cover bg-center" style="background-image: url('/images/outdoor.jpg'); height: 500px;">
+        <a href="#"
+            class="absolute top-4 right-4 text-white text-3xl font-semibold transition-transform transform hover:scale-110">FITNESS
+            & OUTDOORS</a>
+    </div>
+</section>
+
+<section class="relative bg-cover bg-center h-[800px]" style="background-image: url('/images/puzzles.jpg');">
+    <!-- Semi-transparent container -->
+    <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 p-8 rounded-md text-center">
+        <!-- Text "Get ready for gifting season" -->
+        <h2 class="text-white text-4xl font-bold mb-4">
+            Get ready for gifting season
+        </h2>
+
+        <!-- Flavor text -->
+        <p class="text-white max-w-lg mx-auto mb-6">
+            Unearth the perfect treasures for your loved ones. From mind-bending puzzles to handcrafted artisanal
+            delights, make every moment memorable with our exclusive range.
+        </p>
+
+        <!-- Black container with "SHOP GIFTS" -->
+        <div class="inline-block py-2 px-6 bg-black hover:bg-gray-700">
+            <a href="#" class="text-white font-semibold">SHOP GIFTS</a>
+        </div>
+    </div>
+</section>
+
+<section class="relative bg-cover bg-center h-[800px]" style="background-image: url('/images/fashion.jpg');">
+    <!-- E-commerce inspired text about fashion -->
+    <div class="absolute top-10 left-10">
+        <h2 class="text-black text-4xl font-bold">Discover the Latest Trends</h2>
+        <p class="text-black  font-semibold mt-4 max-w-md">Elevate your style with our curated collection of
+            timeless pieces and
+            the
+            season's best trends. Dive into a world where fashion meets functionality.</p>
+    </div>
+
+    <!-- Black container with "SHOP FASHION" -->
+    <div class="absolute top-48 left-10 py-2 px-6 bg-black">
+        <a href="#" class="text-white font-semibold">SHOP FASHION</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-white py-7">
+    <div class="container mx-auto px-4">
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-4 gap-8">
+
+            <!-- Quick Links -->
+            <div>
+                <h5 class="font-bold mb-4">Quick Links</h5>
+                <ul>
+                    <li><a href="#" class="hover:text-gray-400">Home</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Shop</a></li>
+                    <li><a href="#" class="hover:text-gray-400">About Us</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div>
+                <h5 class="font-bold mb-4">Customer Service</h5>
+                <ul>
+                    <li><a href="#" class="hover:text-gray-400">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Returns & Refunds</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Shipping Info</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Order Tracking</a></li>
+                </ul>
+            </div>
+
+            <!-- Information -->
+            <div>
+                <h5 class="font-bold mb-4">Information</h5>
+                <ul>
+                    <li><a href="#" class="hover:text-gray-400">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Affiliate Program</a></li>
+                </ul>
+            </div>
+
+            <!-- Stay Connected -->
+            <div>
+                <h5 class="font-bold mb-4">Stay Connected</h5>
+                <ul class="mb-4">
+                    <li><a href="#" class="hover:text-gray-400"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#" class="hover:text-gray-400"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#" class="hover:text-gray-400"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+</footer>
