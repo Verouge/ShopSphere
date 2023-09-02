@@ -7,6 +7,7 @@ const cloudinary = require('../../../utils/cloudinary');
 
 const Product = require('../../../models/Product');
 const ProductImage = require('../../../models/ProductImage');
+const auth = require('../../../utils/auth');
 
 // use multer to store the images in Destination 'uploads' folder before uploading the the cloud.
 const upload = multer({ dest: 'uploads/'})
