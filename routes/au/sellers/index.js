@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Seller = require("../../../models/Seller");
 const auth = require("../../../utils/auth");
+const bcrypt = require('bcrypt');
 
 router.get("/login", (req, res) => {
   res.render("sellers/login");
@@ -12,7 +13,7 @@ router.post("/create", async (req, res) => {
 
     // Set session variable to indicate user is logged in
     req.session.loggedIn = true;
-    req.session.sellerId = seller.id;  // Assuming your seller object has an 'id' property
+    req.session.sellerId = seller.id; 
 
     // Save the session
     req.session.save(() => {
@@ -29,6 +30,63 @@ router.post("/create", async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+      const sellerData = await Seller.findOne({
+          where: {
+              email: req.body.email,
+          },
+      });
+
+      if (!sellerData) {
+          res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+          return;
+      }
+
+      const validPassword = await sellerData.checkPassword(req.body.password);
+
+      if (!validPassword) {
+          res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+          return;
+      }
+
+      req.session.save(() => {
+          req.session.loggedIn = true;
+          req.session.seller_id = sellerData.id; // Set seller's ID in the session
+
+          res.render("sellers/create-listing", {
+              message: "You are logged in!",
+              seller: sellerData.get({ plain: true })
+          });
+      });
+  } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+  }
+});
+
+
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+// Protect the create-listing route with the auth middleware
+router.get("/create-listing", (req, res) => {
+  if(req.seller) {
+    res.render("sellers/create-listing", { 
+      title: "Create Product Listing",
+      seller: req.seller
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
 
 
 // Fetch all sellers
