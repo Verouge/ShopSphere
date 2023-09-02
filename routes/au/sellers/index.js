@@ -2,18 +2,34 @@ const router = require("express").Router();
 const Seller = require("../../../models/Seller");
 const auth = require("../../../utils/auth");
 
+router.get("/login", (req, res) => {
+  res.render("sellers/login");
+});
 // Create seller
 router.post("/create", async (req, res) => {
   try {
     const seller = await Seller.create(req.body);
-    res.status(201).json({ message: "Seller successfully created!", seller });
+
+    // Set session variable to indicate user is logged in
+    req.session.loggedIn = true;
+    req.session.sellerId = seller.id;  // Assuming your seller object has an 'id' property
+
+    // Save the session
+    req.session.save(() => {
+      // Render the create-listing page and pass the seller's data
+      res.render("sellers/create-listing", { 
+        message: "Thank you for signing up!",
+        seller: seller.get({ plain: true })
+      });
+    });
+
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ message: "Internal server error", error: err.message });
+    res.status(500).json({ message: "Internal server error", error: err.message });
   }
 });
+
+
 
 // Fetch all sellers
 router.get("/", async (req, res) => {

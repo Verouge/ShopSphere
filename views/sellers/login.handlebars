@@ -20,24 +20,29 @@
   
   <!-- Signup Card -->
   <div class="bg-white rounded-lg shadow-md max-w-xs w-full p-4 m-2">
-    <h2 class="text-xl font-bold mb-4">Signup</h2>
-    <form class="space-y-4">
-      <div>
-        <label for="username-signup" class="block text-sm font-medium text-gray-700">Username:</label>
-        <input class="mt-1 p-2 w-full border rounded-md" type="text" id="username-signup" />
-      </div>
-      <div>
-        <label for="email-signup" class="block text-sm font-medium text-gray-700">Email:</label>
-        <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-signup" />
-      </div>
-      <div>
-        <label for="password-signup" class="block text-sm font-medium text-gray-700">Password:</label>
-        <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-signup" />
-      </div>
-      <div>
-        <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600  " type="submit">Signup</button>
-      </div>
-    </form>
+      <h2 class="text-xl font-bold mb-4">Signup</h2>
+      <!-- Add action and method attributes here -->
+      <form action="/au/sellers/create" method="POST" class="space-y-4">
+        <div>
+          <label for="username-signup" class="block text-sm font-medium text-gray-700">Username:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="username-signup" name="username" />
+        </div>
+        <div>
+          <label for="email-signup" class="block text-sm font-medium text-gray-700">Email:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-signup" name="email" />
+        </div>
+        <div>
+          <label for="password-signup" class="block text-sm font-medium text-gray-700">Password:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-signup" name="password" />
+        </div>
+        <div>
+          <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" type="submit">Signup</button>
+        </div>
+      </form>
   </div>
+
   
 </div>
