@@ -12,10 +12,16 @@ const auth = require('../../../utils/auth');
 // use multer to store the images in Destination 'uploads' folder before uploading the the cloud.
 const upload = multer({ dest: 'uploads/'})
 
+// Endpoint to show upload form
+router.get('/listing', (req, res) => {
+    res.render('sellers/create-listing');
+})
 
 
-// Create product
-router.post('/create', upload.array('productImages', 5), async (req, res) => {
+
+// list products
+router.post('/listing', upload.array('productImages', 5), async (req, res) => {
+    console.log("POST request to /listing received");
     try {
         const product = await Product.create(req.body);
 
