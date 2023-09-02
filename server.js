@@ -6,10 +6,30 @@ const sequelize = require("./config/connection");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const helpers = require("./utils/helpers");
+//import the session store module, connecting it sequelize
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // initiate express app
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Set up sessions with cookies
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {
+    // cookie will expire after one day
+    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
+  },
+  resave: false,
+  saveUninitialized: true,
+  // use Sequelize to store session data
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
+// use the session middleware
+app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });
 
