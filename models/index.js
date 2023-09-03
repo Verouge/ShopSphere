@@ -34,7 +34,7 @@ Order.belongsTo(Product, {
 
 Product.hasMany(ProductImage, {
   foreignKey: 'product_id',
-  onDelete: 'CASCADE'
+  as: 'product_images'
 });
 
 ProductImage.belongsTo(Product, {

@@ -59,18 +59,30 @@ router.post('/listing', upload.array('productImages', 5), async (req, res) => {
     }
 });
 
-// Fetch all products details
 router.get('/', async (req, res) => {
     try {
         const products = await Product.findAll();
-         
-        
+
         if (!products.length) {
             res.status(404).json({ message: "No products found." });
             return;
         }
 
-        res.json(products); // Send the products as a response
+        // Map through each product and get its associated images
+        const productsWithImages = await Promise.all(products.map(async product => {
+            const images = await ProductImage.findAll({
+                where: { product_id: product.id },
+                attributes: ['image_url']
+            });
+
+            // Convert image objects to URLs
+            const imageUrls = images.map(image => image.image_url);
+
+            // Return a new product object with image URLs
+            return { ...product.get(), imageUrls };
+        }));
+
+        res.json(productsWithImages);  // Send the products along with their images as a response
 
     } catch (err) {
         console.error(err);
@@ -80,6 +92,8 @@ router.get('/', async (req, res) => {
         });
     }
 });
+
+
 
 // Fetch images associated with a specific product
 router.get('/:productId/images', async (req, res) => {
