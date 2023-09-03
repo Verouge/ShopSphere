@@ -1,3 +1,4 @@
+// ./routes/au/sellers/index.js
 const router = require("express").Router();
 const Seller = require("../../../models/Seller");
 const auth = require("../../../utils/auth");

@@ -10,10 +10,15 @@
     </div>
     <div class="flex items-center">
         <!-- User Profile Icon and Modal Trigger -->
+
+        <a href="/au/sellers/login">Sell</a>
+
         <div class="relative group inline-block">
             <a href="#" class="mx-10" id="profileIcon">
                 <i class="fa-solid fa-user fa-xl"></i>
             </a>
+
+            
 
             <!-- The Login Modal -->
             <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-40 hidden"
@@ -88,17 +93,18 @@
     <div class="bg-black text-white">
         <div class="container mx-auto py-2">
             <nav class="flex space-x-6 overflow-x-auto scrollbar-hide justify-evenly">
-                <a href="#" class="hover:text-gray-400">Books</a>
+                <a href="/au/products/category/books" class="hover:text-gray-400">Books</a>
                 <a href="#" class="hover:text-gray-400">Fashion</a>
                 <a href="#" class="hover:text-gray-400">Electronics</a>
-                <a href="#" class="hover:text-gray-400">Home</a>
-                <a href="#" class="hover:text-gray-400">Toys & Games</a>
-                <a href="#" class="hover:text-gray-400">Sports</a>
+                <a href="/au/products/category/home" class="hover:text-gray-400">Home & Garden</a>
+                <a href="/au/products/category/toys-games" class="hover:text-gray-400">Toys & Games</a>
+                <a href="/au/products/category/sports" class="hover:text-gray-400">Sports</a>
                 <a href="#" class="hover:text-gray-400">Fitness & Outdoors</a>
             </nav>
         </div>
     </div>
 </nav>
+
 
 <section class="relative h-[600px] bg-cover bg-center" style="background-image: url('/images/hero-1.jpg');">
     <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
@@ -125,6 +131,32 @@
     <div class="relative overflow-hidden w-full mx-auto max-w-7xl">
         <!-- Carousel Content -->
         <div class="flex whitespace-nowrap overflow-x-scroll scrollbar-hide" id="productCarousel">
+
+
+
+
+            {{!-- @Brandon: please delete the sampel product as the product will be added in here dynamically  --}}
+        
+        <div class="products-list">
+            {{#each products}}
+                <a href="/product/{{id}}" 
+                class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
+                    
+                    {{#if imageUrls}}
+                        <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[60px] object-cover mb-3">
+                    {{/if}}
+                    
+                    <h3 class="text-lg font-semibold mb-2">{{name}}</h3>
+                    <p class="text-xl font-bold">${{price}}</p>
+                </a>
+            {{/each}}
+        </div>
+
+        {{!-- @Brandon: please delete the sampel product as the product will be added in here dynamically  --}}
+
+
+
+
             <!-- Sample Product Card -->
             <a href="/path-to-product-1-page"
                 class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
@@ -190,12 +222,12 @@
 <section class="flex">
     <div class="relative w-1/2 bg-cover bg-center"
         style="background-image: url('/images/electronics.jpg'); height: 500px;">
-        <a href="#"
+        <a href="/au/products/category/electronics"
             class="absolute top-4 right-4 text-white text-3xl font-semibold transition-transform transform hover:scale-110">ELECTRONICS</a>
     </div>
 
     <div class="relative w-1/2 bg-cover bg-center" style="background-image: url('/images/outdoor.jpg'); height: 500px;">
-        <a href="#"
+        <a href="/au/products/category/fitness-outdoors"
             class="absolute top-4 right-4 text-white text-3xl font-semibold transition-transform transform hover:scale-110">FITNESS
             & OUTDOORS</a>
     </div>
@@ -235,7 +267,7 @@
 
     <!-- Black container with "SHOP FASHION" -->
     <div class="absolute top-48 left-10 py-2 px-6 bg-black">
-        <a href="#" class="text-white font-semibold">SHOP FASHION</a>
+        <a href="/au/products/category/fashion" class="text-white font-semibold">SHOP FASHION</a>
     </div>
 </section>
 

@@ -1,3 +1,4 @@
+// ./routes/au/products/index.js
 const express = require('express');
 const router = express.Router();
 // multer is a node.js middleware for handling multipart/form-data
@@ -18,7 +19,6 @@ router.get('/listing', withAuth, (req, res) => {
     
     res.render('sellers/create-listing');
 })
-
 
 
 // list products
@@ -59,9 +59,12 @@ router.post('/listing', upload.array('productImages', 5), async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+// Fetch latest products (using 'createdAt' field)
+const latestProduct = async (req, res) => {
+// router.get('/latest', async (req, res) => {
     try {
         const products = await Product.findAll();
+        order: [['createdAt', 'ASC']]  // Order by 'createdAt' in ascending order
 
         if (!products.length) {
             res.status(404).json({ message: "No products found." });
@@ -82,7 +85,7 @@ router.get('/', async (req, res) => {
             return { ...product.get(), imageUrls };
         }));
 
-        res.json(productsWithImages);  // Send the products along with their images as a response
+        res.render('homepage', { products: productsWithImages});
 
     } catch (err) {
         console.error(err);
@@ -91,7 +94,49 @@ router.get('/', async (req, res) => {
             error: err.message
         });
     }
+};
+
+// Get products based on a specific category
+router.get('/category/:categoryName', async (req, res) => {
+    try {
+        const categoryName = req.params.categoryName;
+        
+        const products = await Product.findAll({ 
+            where: { 
+                category: categoryName 
+            } 
+        });
+
+        if (!products.length) {
+            res.status(404).json({ message: `No products found for category: ${categoryName}.` });
+            return;
+        }
+
+        // Map through each product and get its associated images
+        const productsWithImages = await Promise.all(products.map(async product => {
+            const images = await ProductImage.findAll({
+                where: { product_id: product.id },
+                attributes: ['image_url']
+            });
+
+            // Convert image objects to URLs
+            const imageUrls = images.map(image => image.image_url);
+
+            // Return a new product object with image URLs
+            return { ...product.get(), imageUrls };
+        }));
+
+        res.render('category', { products: productsWithImages });  // Render the data in category.handlebars view
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Failed to fetch products for the category. Please try again later.",
+            error: err.message
+        });
+    }
 });
+
 
 
 
@@ -217,3 +262,4 @@ router.post('/delete/:id', auth, async (req, res) => {
 });
 
 module.exports = router;
+module.exports.latestProduct = latestProduct; // Export the specific route logic
