@@ -29,21 +29,17 @@ Product.init({
             key: 'id',
         },
     },
-
-    category_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'categories',
-            key: 'id',
-        },
+    category: {
+        type: DataTypes.ENUM,
+        values: ['Books', 'Fashion', 'Electronics', 'Home', 'Toys & Games', 'Sports', 'Fitness & Outdoors'],
+        allowNull: false,
     },
-
-    quantity: {  // Adding the quantity attribute
+    quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 1,  
+        defaultValue: 1,
         validate: {
-            min: 1,  
+            min: 1,
         }
     }
 }, {

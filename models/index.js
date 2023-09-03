@@ -42,14 +42,14 @@ ProductImage.belongsTo(Product, {
 });
 
 // Relationship between Category and Product
-Category.hasMany(Product, {
-  foreignKey: 'category_id',
-  onDelete: 'CASCADE',
-});
+// Category.hasMany(Product, {
+//   foreignKey: 'category_id',
+//   onDelete: 'CASCADE',
+// });
 
-Product.belongsTo(Category, {
-  foreignKey: 'category_id',
-});
+// Product.belongsTo(Category, {
+//   foreignKey: 'category_id',
+// });
 
 
 
