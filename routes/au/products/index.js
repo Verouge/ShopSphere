@@ -8,12 +8,14 @@ const cloudinary = require('../../../utils/cloudinary');
 const Product = require('../../../models/Product');
 const ProductImage = require('../../../models/ProductImage');
 const auth = require('../../../utils/auth');
+const withAuth = require('../../../utils/auth2');
 
 // use multer to store the images in Destination 'uploads' folder before uploading the the cloud.
 const upload = multer({ dest: 'uploads/'})
 
 // Endpoint to show upload form
-router.get('/listing', (req, res) => {
+router.get('/listing', withAuth, (req, res) => {
+    
     res.render('sellers/create-listing');
 })
 
