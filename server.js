@@ -1,4 +1,4 @@
-//import neccssary modules
+// server.js
 const express = require("express");
 const path = require("path");
 const routes = require("./routes");
@@ -7,27 +7,49 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const helpers = require("./utils/helpers");
 
-// initiate express app
+// Import the session store module, connecting it to sequelize
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+// Initiate express app
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Set up sessions with cookies
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {
+    // Cookie will expire after one day
+    maxAge: 24 * 60 * 60 * 1000, // Expires after 1 day
+  },
+  resave: false,
+  saveUninitialized: true,
+  // Use Sequelize to store session data
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
+// Use the session middleware
+app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-// parse json data from request body
+// Parse json data from request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//serve static Middleware from 'public' directory
+// Serve static Middleware from 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
 
-//use routes from './routes'
+// Use routes from './routes'
 app.use(routes);
 
-// change synchronization option to "force:false" before production
-sequelize.sync({ alter: true }).then(() => {
+// Synchronize database and start the server
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
-    console.log(" Server listening on: http://localhost:" + PORT)
+    console.log("Server listening on: http://localhost:" + PORT)
   );
 });
+

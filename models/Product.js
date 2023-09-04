@@ -15,7 +15,7 @@ Product.init({
         allowNull: false,
     },
     price: {
-        type: DataTypes.DECIMAL(5, 2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
     description: {
@@ -29,12 +29,17 @@ Product.init({
             key: 'id',
         },
     },
-    quantity: {  // Adding the quantity attribute
+    category: {
+        type: DataTypes.ENUM,
+        values: ['Books', 'Fashion', 'Electronics', 'Home', 'Toys', 'Sports', 'Fitness'],
+        allowNull: false,
+    },
+    quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 1,  
+        defaultValue: 1,
         validate: {
-            min: 1,  
+            min: 1,
         }
     }
 }, {

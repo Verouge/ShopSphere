@@ -1,0 +1,54 @@
+<div class="flex justify-between flex-wrap p-4">
+  
+  <!-- Login Card -->
+  <div class="bg-white rounded-lg shadow-md max-w-xs w-full p-4 m-2">
+    <h2 class="text-xl font-bold mb-4">Login</h2>
+    <form action="/au/sellers/login" method="POST" class="space-y-4">
+      <div>
+        <label for="email-login" class="block text-sm font-medium text-gray-700">Email:</label>
+        <!-- Added name attribute here -->
+        <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-login" name="email" />
+      </div>
+      <div>
+        <label for="password-login" class="block text-sm font-medium text-gray-700">Password:</label>
+        <!-- Added name attribute here -->
+        <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-login" name="password" />
+      </div>
+      <div>
+        <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600 " type="submit">Login</button>
+      </div>
+    </form>
+
+  </div>
+  
+  <!-- Signup Card -->
+  <div class="bg-white rounded-lg shadow-md max-w-xs w-full p-4 m-2">
+      <h2 class="text-xl font-bold mb-4">Signup</h2>
+      <!-- Add action and method attributes here -->
+      <form action="/au/sellers/create" method="POST" class="space-y-4">
+        <div>
+          <label for="username-signup" class="block text-sm font-medium text-gray-700">Username:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="username-signup" name="username" />
+        </div>
+        <div>
+          <label for="email-signup" class="block text-sm font-medium text-gray-700">Email:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-signup" name="email" />
+        </div>
+        <div>
+          <label for="password-signup" class="block text-sm font-medium text-gray-700">Password:</label>
+          <!-- Add the name attribute -->
+          <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-signup" name="password" />
+        </div>
+        <div class="text-xs text-gray-500">
+          Password must be at least 8 characters long.
+        </div>
+        <div>
+          <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" type="submit">Signup</button>
+        </div>
+      </form>
+  </div>
+
+  
+</div>

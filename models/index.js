@@ -3,6 +3,7 @@ const Buyer = require('./Buyer');
 const Product = require('./Product');
 const Order = require('./Order');
 const ProductImage = require('./ProductImage');
+const Category = require('./Category');
 
 
 Seller.hasMany(Product, {
@@ -33,13 +34,23 @@ Order.belongsTo(Product, {
 
 Product.hasMany(ProductImage, {
   foreignKey: 'product_id',
-  onDelete: 'CASCADE'
+  as: 'product_images'
 });
 
 ProductImage.belongsTo(Product, {
   foreignKey: 'product_id'
 });
 
+// Relationship between Category and Product
+// Category.hasMany(Product, {
+//   foreignKey: 'category_id',
+//   onDelete: 'CASCADE',
+// });
+
+// Product.belongsTo(Category, {
+//   foreignKey: 'category_id',
+// });
 
 
-module.exports = { Seller, Buyer, Product, Order, ProductImage };
+
+module.exports = { Seller, Buyer, Product, Order, ProductImage, Category };

@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const { Product, ProductImage } = require("../models");
 
-router.get("/", (req, res) => {
-  res.render("homepage"); // This assumes you have a home.handlebars in the views folder. If not, replace 'home' with the correct handlebars file without the .handlebars extension.
-});
+// Import the latestProduct function
+const { latestProduct } = require('./au/products/index');
+
+// Use the latestProduct as the route handler for the root route
+router.get('/', latestProduct);
 
 module.exports = router;
