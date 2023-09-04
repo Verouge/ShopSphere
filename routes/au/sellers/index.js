@@ -107,6 +107,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const seller = await Seller.findOne({ where: { id: req.params.id} });
+    if (!seller) {
+      res.status(404).json({ message: 'Seller not found.'});
+      return;
+    }
+    res.status(seller);
+   } catch (err) { 
+    res.status(500).json( {
+      message: 'Failed to fetch seller. Please try again later',
+      error: err.message,
+    });
+   }
+});
+
 // Seller dashboard
 router.get("/dashboard", auth, async (req, res) => {
   // add auth middleware
