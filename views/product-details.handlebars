@@ -14,7 +14,7 @@
 
         <div class="md:flex md:items-start mb-6">
             <div class="md:w-1/2">
-                <!-- Slider or Image Gallery would be more suitable here, but for now, we'll display the first image as a large preview and others as thumbnails -->
+                <!-- Image Gallery  -->
                 <img class="w-full mb-4 rounded-lg" src="{{product.imageUrls.[0]}}" alt="{{product.name}}">
 
                 <div class="flex space-x-2 overflow-x-auto">
@@ -28,10 +28,10 @@
                 <p class="text-xl text-gray-600 mb-4">Price: ${{product.price}}</p>
                 <p class="mb-2">Available: {{product.quantity}}</p>
                 <p class="mb-2">Listed {{product.createdAt}} ago</p>
-                <!-- Updated seller display -->
+
                 <p class="mb-2">Seller's Store: 
                     <a href="/au/sellers/{{seller.id}}" class="text-blue-500 hover:underline">{{seller.username}}</a>
-                    <!-- or if you don't have a route to individual sellers, you can just display the username without a link: {{seller.name}} -->
+
                 </p>
                 <p class="mb-2">Seller-Email: <span class="text-gray-600">{{seller.email}}</span></p>
                 <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full mt-4">

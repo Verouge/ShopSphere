@@ -1,6 +1,7 @@
 // ./routes/au/sellers/index.js
 const router = require("express").Router();
-const Seller = require("../../../models/Seller");
+const { Seller, Product, ProductImage} = require("../../../models/");
+
 const auth = require("../../../utils/auth");
 const bcrypt = require('bcrypt');
 
@@ -122,6 +123,50 @@ router.get('/:id', async (req, res) => {
     });
    }
 });
+
+// Get products based on a specific seller ID
+router.get('/store/:sellerId', async (req, res) => {
+  try {
+      const sellerId = req.params.sellerId;
+      
+      const products = await Product.findAll({ 
+          where: { 
+              seller_id: sellerId  // Assuming your Product model has a seller_id field
+          } 
+      });
+
+      if (!products.length) {
+          res.status(404).json({ message: `No products found for seller ID: ${sellerId}.` });
+          return;
+      }
+
+      // Map through each product and get its associated images
+      const productsWithImages = await Promise.all(products.map(async product => {
+          const images = await ProductImage.findAll({
+              where: { product_id: product.id },
+              attributes: ['image_url']
+          });
+
+          // Convert image objects to URLs
+          const imageUrls = images.map(image => image.image_url);
+
+          // Return a new product object with image URLs
+          return { ...product.get(), imageUrls };
+      }));
+
+      const seller = await Seller.findOne({ where: { id: sellerId } });
+
+      res.render('store', { products: productsWithImages, seller: seller.get() });  // Render the data in sellStore.handlebars view
+
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({
+          message: "Failed to fetch products for the seller. Please try again later.",
+          error: err.message
+      });
+  }
+});
+
 
 // Seller dashboard
 router.get("/dashboard", auth, async (req, res) => {
