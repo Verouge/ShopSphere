@@ -96,6 +96,42 @@ const latestProduct = async (req, res) => {
     }
 };
 
+// Fetch all
+    router.get('/all', async (req, res) => {
+        try {
+            const products = await Product.findAll();
+            order: [['createdAt', 'ASC']]  // Order by 'createdAt' in ascending order
+    
+            if (!products.length) {
+                res.status(404).json({ message: "No products found." });
+                return;
+            }
+    
+            // Map through each product and get its associated images
+            const productsWithImages = await Promise.all(products.map(async product => {
+                const images = await ProductImage.findAll({
+                    where: { product_id: product.id },
+                    attributes: ['image_url']
+                });
+    
+                // Convert image objects to URLs
+                const imageUrls = images.map(image => image.image_url);
+    
+                // Return a new product object with image URLs
+                return { ...product.get(), imageUrls };
+            }));
+    
+            res.json(productsWithImages);
+    
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({
+                message: "Failed to fetch products. Please try again later.",
+                error: err.message
+            });
+        }
+    });
+
 // Get products based on a specific category
 router.get('/category/:categoryName', async (req, res) => {
     try {

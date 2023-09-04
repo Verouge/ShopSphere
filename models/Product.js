@@ -31,7 +31,7 @@ Product.init({
     },
     category: {
         type: DataTypes.ENUM,
-        values: ['Books', 'Fashion', 'Electronics', 'Home', 'Toys & Games', 'Sports', 'Fitness & Outdoors'],
+        values: ['Books', 'Fashion', 'Electronics', 'Home', 'Toys', 'Sports', 'Fitness'],
         allowNull: false,
     },
     quantity: {
