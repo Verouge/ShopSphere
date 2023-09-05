@@ -108,10 +108,10 @@
 <section class="relative h-[600px] bg-cover bg-center" style="background-image: url('/images/hero-1.jpg');">
     <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
 
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+ <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 class="text-4xl font-bold text-white mb-6">Elevate Everyday Living</h1>
         <p class="text-white mb-4 max-w-md">Discover unique finds that transform your home into a personal haven.</p>
-        <a href="#" class="bg-black py-2 px-6 text-white font-semibold hover:bg-gray-700">SHOP HOME</a>
+        <a href="/au/products/category/home" class="bg-black py-2 px-6 text-white font-semibold hover:bg-gray-700">SHOP HOME</a>
     </div>
 </section>
 
@@ -131,21 +131,19 @@
     <div class="relative overflow-hidden w-full mx-auto max-w-7xl">
         <!-- Carousel Content -->
         <div class="flex whitespace-nowrap overflow-x-scroll scrollbar-hide" id="productCarousel">
-
-        {{#each products}}
-        <a href="/product/{{id}}"
-            class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
         
-            {{#if imageUrls}}
-            <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[200px] object-cover mb-3">
-            {{/if}}
-        
-            <h3 class="text-lg font-semibold mb-2 truncate w-full max-w-xs">{{name}}</h3>
-            <p class="text-gray-600 mb-3 line-clamp-2 w-full max-w-xs">{{description}}</p>
-            <p class="text-xl font-bold">${{price}}</p>
-        </a>
-        {{/each}}
+                {{#each products}}
+                    <a href="/au/products/product-details/{{id}}" 
+                    class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
 
+                        {{#if imageUrls}}
+                            <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[60px] object-cover mb-3">
+                        {{/if}}
+
+                        <h3 class="text-lg font-semibold mb-2">{{name}}</h3>
+                        <p class="text-xl font-bold">${{price}}</p>
+                    </a>
+                {{/each}}
         </div>
     </div>
 </section>
@@ -181,7 +179,7 @@
 
         <!-- Black container with "SHOP GIFTS" -->
         <div class="inline-block py-2 px-6 bg-black hover:bg-gray-700">
-            <a href="#" class="text-white font-semibold">SHOP GIFTS</a>
+            <a href="au/products/category/Toys" class="text-white font-semibold">SHOP GIFTS</a>
         </div>
     </div>
 </section>
