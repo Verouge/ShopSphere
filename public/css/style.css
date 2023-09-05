@@ -650,6 +650,9 @@ video {
 
 .z-40 {
   z-index: 40;
+  
+.z-50 {
+  z-index: 50;
 }
 
 .m-2 {
@@ -733,6 +736,13 @@ video {
 
 .mt-7 {
   margin-top: 1.75rem;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .block {
@@ -937,6 +947,12 @@ video {
 
 .overflow-x-scroll {
   overflow-x: scroll;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .whitespace-nowrap {
@@ -1218,6 +1234,15 @@ video {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 .hover\:scale-105:hover {
