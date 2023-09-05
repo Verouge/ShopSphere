@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>{{product.name}}</title>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10 px-4">
+        <h1 class="text-3xl font-bold mb-8">{{product.name}}</h1>
+
+        <div class="md:flex md:items-start mb-6">
+            <div class="md:w-1/2">
+                <!-- Image Gallery  -->
+                <img class="w-full mb-4 rounded-lg" src="{{product.imageUrls.[0]}}" alt="{{product.name}}">
+
+                <div class="flex space-x-2 overflow-x-auto">
+                    {{#each product.imageUrls}}
+                    <a href="#" class="thumbnail-link" data-src="{{this}}">
+                        <img class="w-24 h-24 rounded-lg" src="{{this}}" alt="{{product.name}}">
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="md:w-1/2 md:pl-8">
+                <p class="text-xl text-gray-600 mb-4">  <b>Price:</b> ${{product.price}}</p>
+                <p class="mb-2"> <b>Available:</b> {{product.quantity}} items </p>
+                <p class="mb-2 createdAt text-gray-600">Listed {{product.createdAt}} ago</p>
+
+
+                <p class="mb-2"> <b>Visit Seller's Store:</b>
+                    <a href="/au/sellers/store/{{seller.id}}" class="text-blue-500 hover:underline">{{seller.username}}</a>
+
+                </p>
+                <p class="mb-2">Contact Seller: <a href="mailto:{{seller.email}}" class="text-gray-600 hover:underline">{{seller.email}}</a></p>
+
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full mt-4">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mb-4">Product Description:</h2>
+        <p class="text-gray-700 leading-relaxed mb-8">{{product.description}}</p>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    // function to return relative "time ago"
+   function timeAgo(date) {
+    //current timestamp
+    const now = new Date();
+    //Calculate the difference between now and given dates in seconds
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    let interval = Math.floor(diffInSeconds / 31536000);
+    if (interval >= 1) return interval + " year" + (interval === 1 ? "" : "s") + " ago";
+
+    interval = Math.floor(diffInSeconds / 2592000);
+    if (interval >= 1) return interval + " month" + (interval === 1 ? "" : "s") + " ago";
+
+    interval = Math.floor(diffInSeconds / 86400);
+    if (interval >= 1) return interval + " day" + (interval === 1 ? "" : "s") + " ago";
+
+    interval = Math.floor(diffInSeconds / 3600);
+    if (interval >= 1) return interval + " hour" + (interval === 1 ? "" : "s") + " ago";
+
+    interval = Math.floor(diffInSeconds / 60);
+    if (interval >= 1) return interval + " minute" + (interval === 1 ? "" : "s") + " ago";
+
+    return "just now";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const mainImage = document.querySelector('.w-full');
+    const thumbnails = document.querySelectorAll('.thumbnail-link');
+
+    // Thumbnail click functionality
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainImage.src = thumbnail.getAttribute('data-src');
+        });
+    });
+
+    // Time ago functionality
+    const createdAtElement = document.querySelector('.createdAt');
+    const dateString = createdAtElement.textContent.replace('Listed ', '').replace(' ago', ''); 
+    const date = new Date(dateString);
+    createdAtElement.textContent = "Listed: " + timeAgo(date);
+});
+
+
+</script>

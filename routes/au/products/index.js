@@ -7,9 +7,11 @@ const multer = require('multer');
 const cloudinary = require('../../../utils/cloudinary');
 
 const Product = require('../../../models/Product');
+const Seller = require('../../../models/Seller');
 const ProductImage = require('../../../models/ProductImage');
 const auth = require('../../../utils/auth');
 const withAuth = require('../../../utils/auth2');
+
 
 // use multer to store the images in Destination 'uploads' folder before uploading the the cloud.
 const upload = multer({ dest: 'uploads/'})
@@ -161,8 +163,8 @@ router.get('/category/:categoryName', async (req, res) => {
             // Return a new product object with image URLs
             return { ...product.get(), imageUrls };
         }));
-
-        res.render('category', { products: productsWithImages });  // Render the data in category.handlebars view
+        console.log(categoryName);
+        res.render('category', { products: productsWithImages, categoryName: categoryName });  // Render the data in category.handlebars view
 
     } catch (err) {
         console.error(err);
@@ -172,6 +174,55 @@ router.get('/category/:categoryName', async (req, res) => {
         });
     }
 });
+
+// fetch Product detail and seller info using axios helper by product_id
+router.get('/product-details/:productId', async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        
+        const product = await Product.findOne({ 
+            where: { 
+                id: productId 
+            } 
+        });
+
+        if (!product) {
+            res.status(404).render('error', { message: `Product with ID: ${productId} not found.` });
+            return;
+        }
+
+        const images = await ProductImage.findAll({
+            where: { product_id: product.id },
+            attributes: ['image_url']
+        });
+
+        // Convert image objects to URLs
+        const imageUrls = images.map(image => image.image_url);
+
+        // Fetch seller details based on the seller_id from the product
+        const seller = await Seller.findOne({ 
+            where: { 
+                id: product.seller_id 
+            } 
+        });
+
+        if (!seller) {
+            res.status(404).render('error', { message: `Seller with ID: ${product.seller_id} not found.` });
+            return;
+        }
+
+        // Render the product-details handlebars view with product and seller data
+        res.render('product-details', { product: { ...product.get(), imageUrls }, seller: seller.get() }); 
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).render('error', {
+            message: "Failed to fetch product details. Please try again later.",
+            error: err.message
+        });
+    }
+});
+
 
 
 
