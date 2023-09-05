@@ -133,16 +133,17 @@
         <div class="flex whitespace-nowrap overflow-x-scroll scrollbar-hide" id="productCarousel">
         
                 {{#each products}}
-                    <a href="/au/products/product-details/{{id}}" 
+                <a href="/au/products/product-details/{{id}}"
                     class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
-
-                        {{#if imageUrls}}
-                            <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[60px] object-cover mb-3">
-                        {{/if}}
-
-                        <h3 class="text-lg font-semibold mb-2">{{name}}</h3>
-                        <p class="text-xl font-bold">${{price}}</p>
-                    </a>
+                
+                    {{#if imageUrls}}
+                    <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[200px] object-cover mb-3">
+                    {{/if}}
+                
+                    <h3 class="text-lg font-semibold mb-2 truncate w-full max-w-xs">{{name}}</h3>
+                    <p class="text-gray-600 mb-3 line-clamp-2 w-full max-w-xs">{{description}}</p>
+                    <p class="text-xl font-bold">${{price}}</p>
+                </a>
                 {{/each}}
         </div>
     </div>
