@@ -17,7 +17,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {{#each products}}
-            <!-- Adjust the href to fit your endpoint structure -->
+           
             <a href="/au/products/product-details/{{this.id}}" class="block product-card bg-white rounded-lg shadow-lg p-4">
                 <img class="mx-auto mb-4 rounded-lg" src="{{this.imageUrls.[0]}}" alt="{{this.name}}" width="200" height="200">  <!-- Display the first image -->
                 <h2 class="text-xl font-semibold">{{this.name}}</h2>
