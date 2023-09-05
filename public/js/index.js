@@ -29,4 +29,6 @@ nextBtn.addEventListener("click", function () {
 prevBtn.addEventListener("click", function () {
   productCarousel.scrollBy({ left: -productWidth, behavior: "smooth" });
   // Scroll the carousel backwards by the width of one product
+
+  //test
 });
