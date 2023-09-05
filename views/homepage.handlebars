@@ -98,7 +98,6 @@
                 <a href="/au/products/category/electronics" class="hover:text-gray-400">Electronics</a>
                 <a href="/au/products/category/home" class="hover:text-gray-400">Home & Garden</a>
                 <a href="/au/products/category/Toys" class="hover:text-gray-400">Toys & Games</a>
-                <a href="/au/products/category/sports" class="hover:text-gray-400">Sports</a>
                 <a href="/au/products/category/Fitness" class="hover:text-gray-400">Fitness & Outdoors</a>
             </nav>
         </div>
@@ -111,7 +110,7 @@
 
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 class="text-4xl font-bold text-white mb-6">create a harmonious living space</h1>
-        <a href="#" class="bg-black py-2 px-6 text-white font-semibold hover:bg-gray-700">SHOP NOW</a>
+        <a href="/au/products/category/home" class="bg-black py-2 px-6 text-white font-semibold hover:bg-gray-700">SHOP NOW</a>
     </div>
 </section>
 
@@ -137,20 +136,21 @@
 
             {{!-- @Brandon: please delete the sampel product as the product will be added in here dynamically  --}}
         
-        <div class="products-list">
-            {{#each products}}
-                <a href="/product/{{id}}" 
-                class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
-                    
-                    {{#if imageUrls}}
-                        <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[60px] object-cover mb-3">
-                    {{/if}}
-                    
-                    <h3 class="text-lg font-semibold mb-2">{{name}}</h3>
-                    <p class="text-xl font-bold">${{price}}</p>
-                </a>
-            {{/each}}
-        </div>
+                        <div class="products-list">
+                {{#each products}}
+                    <a href="/au/products/product-details/{{id}}" 
+                    class="min-w-[280px] bg-white p-5 mx-2 inline-block transition-transform transform hover:scale-105">
+
+                        {{#if imageUrls}}
+                            <img src="{{imageUrls.[0]}}" alt="{{name}}" class="w-full h-[60px] object-cover mb-3">
+                        {{/if}}
+
+                        <h3 class="text-lg font-semibold mb-2">{{name}}</h3>
+                        <p class="text-xl font-bold">${{price}}</p>
+                    </a>
+                {{/each}}
+            </div>
+
 
         {{!-- @Brandon: please delete the sampel product as the product will be added in here dynamically  --}}
 
@@ -250,7 +250,7 @@
 
         <!-- Black container with "SHOP GIFTS" -->
         <div class="inline-block py-2 px-6 bg-black hover:bg-gray-700">
-            <a href="#" class="text-white font-semibold">SHOP GIFTS</a>
+            <a href="au/products/category/Toys" class="text-white font-semibold">SHOP GIFTS</a>
         </div>
     </div>
 </section>
