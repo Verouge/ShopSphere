@@ -167,6 +167,64 @@ router.get('/store/:sellerId', async (req, res) => {
   }
 });
 
+// Get products based on a specific seller ID
+router.get('/dashboard/:sellerId', async (req, res) => {
+  try {
+      const sellerId = req.params.sellerId;
+      
+      const products = await Product.findAll({ 
+          where: { 
+              seller_id: sellerId  // Assuming your Product model has a seller_id field
+          } 
+      });
+
+      if (!products.length) {
+          res.status(404).json({ message: `No products found for seller ID: ${sellerId}.` });
+          return;
+      }
+
+      // Map through each product and get its associated images
+      const productsWithImages = await Promise.all(products.map(async product => {
+          const images = await ProductImage.findAll({
+              where: { product_id: product.id },
+              attributes: ['image_url']
+          });
+
+          // Convert image objects to URLs
+          const imageUrls = images.map(image => image.image_url);
+
+          // Return a new product object with image URLs
+          return { ...product.get(), imageUrls };
+      }));
+
+      const seller = await Seller.findOne({ where: { id: sellerId } });
+
+      res.render('sellers/dashboard', { products: productsWithImages, seller: seller.get() });  // Render the data in sellStore.handlebars view
+
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({
+          message: "Failed to fetch products for the seller. Please try again later.",
+          error: err.message
+      });
+  }
+});
+
+// Handle product updates
+router.put('/products/:id', async (req, res) => {
+  const { name, price, quantity } = req.body;
+  try {
+      const product = await Product.findByPk(req.params.id);
+      product.name = name;
+      product.price = price;
+      product.quantity = quantity;
+      await product.save();
+      res.status(200).send({ message: 'Product updated successfully' });
+  } catch (error) {
+      res.status(500).send({ error: 'Error updating product' });
+  }
+});
+
 
 // Seller dashboard
 router.get("/dashboard", auth, async (req, res) => {

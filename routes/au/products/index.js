@@ -54,7 +54,8 @@ router.post('/listing', upload.array('productImages', 5), async (req, res) => {
         
             await ProductImage.bulkCreate(productImages);
         }
-        res.status(201).json({ message: "Product successfully created!", product, imageUrls });
+        res.status(200).json({ success: true });
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Failed to create product.", error: err.message });
