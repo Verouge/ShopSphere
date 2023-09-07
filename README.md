@@ -37,8 +37,8 @@ Welcome to ShopSphere, Our E-Commerce Platform, a next-generation online marketp
 - [Getting Started](#getting-started)
   - [Installation & Local Development](#installation-&-local-development)
 - [Usage](#usage)
-  - [Sellers](#For-Sellers:)
-  - [Buyers](#For-Buyers:)
+  - [Sellers](#for-sellers)
+  - [Buyers](#for-buyers)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
@@ -100,9 +100,9 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Credits
 
-Alexander Duncan
-Baz Rahimi
-Brandon Zhang
+- Alexander Duncan
+- Baz Rahimi
+- Brandon Zhang
 
 ## Acknowledgments
 
