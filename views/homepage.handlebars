@@ -24,28 +24,23 @@
             <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 hidden"
                 id="loginModal">
                 <div class="bg-white rounded-lg w-[735px] h-[547px] flex items-center relative justify-evenly">
-
-
                     <!-- Sign In Section -->
                     <div class="w-[277px] h-[478px] p-8">
                         <h2 class="text-2xl mb-4">Sign In</h2>
-                        <form>
+                        <form action="/au/buyers/login" method="post">
                             <div class="mb-4">
-                                <label class="block text-sm mb-2" for="username">Email</label>
-                                <input type="text" id="username" name="username" class="border rounded w-full p-2">
+                                <label class="block text-sm mb-2" for="email">Email</label>
+                                <input type="email" id="email" name="email" class="border rounded w-full p-2" required>
                             </div>
                             <div class="mb-4">
                                 <label class="block text-sm mb-2" for="password">Password</label>
-                                <input type="password" id="password" name="password" class="border rounded w-full p-2">
+                                <input type="password" id="password" name="password" class="border rounded w-full p-2" required>
                             </div>
-                            <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign
-                                In</button>
+                            <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign In</button>
                         </form>
                     </div>
-
                     <!-- Divider -->
                     <div class="w-[2px] h-[305px] bg-gray-200"></div>
-
                     <!-- Create Account Section -->
                     <div class="w-[280px] h-[478px] p-8">
                         <h2 class="text-2xl mb-4">Create Account</h2>
@@ -55,15 +50,12 @@
                             <li>Save multiple shipping addresses</li>
                             <li>Access to order history and tracking</li>
                         </ul>
-                        <a href="#" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
+                        <a href="/au/buyers/create-account" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
                     </div>
-
                     <button id="closeModal" type="button" title="Close Popup" class="absolute top-4 right-4">
                         <span class="sr-only">Close Popup</span>
                         <i class="fa-solid fa-times text-2xl"></i>
                     </button>
-
-
                 </div>
             </div>
         </div>
