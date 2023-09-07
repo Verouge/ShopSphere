@@ -1,54 +1,56 @@
-<div class="flex justify-between flex-wrap p-4">
-  
-  <!-- Login Card -->
-  <div class="bg-white rounded-lg shadow-md max-w-xs w-full p-4 m-2">
-    <h2 class="text-xl font-bold mb-4">Login</h2>
-    <form action="/au/sellers/login" method="POST" class="space-y-4">
-      <div>
-        <label for="email-login" class="block text-sm font-medium text-gray-700">Email:</label>
-        <!-- Added name attribute here -->
-        <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-login" name="email" />
-      </div>
-      <div>
-        <label for="password-login" class="block text-sm font-medium text-gray-700">Password:</label>
-        <!-- Added name attribute here -->
-        <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-login" name="password" />
-      </div>
-      <div>
-        <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600 " type="submit">Login</button>
-      </div>
-    </form>
+<!-- ShopSphere Header -->
+<header class="bg-black p-4">
+  <a href="/" class="text-white text-2xl font-bold tracking-wider">
+    <i class="fa-solid fa-shop"></i> ShopSphere
+  </a>
+</header>
 
-  </div>
-  
-  <!-- Signup Card -->
-  <div class="bg-white rounded-lg shadow-md max-w-xs w-full p-4 m-2">
-      <h2 class="text-xl font-bold mb-4">Signup</h2>
-      <!-- Add action and method attributes here -->
-      <form action="/au/sellers/create" method="POST" class="space-y-4">
-        <div>
-          <label for="username-signup" class="block text-sm font-medium text-gray-700">Username:</label>
-          <!-- Add the name attribute -->
-          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="username-signup" name="username" />
+<div class="flex flex-col h-screen p-4 bg-gray-100">
+
+  <!-- Portal Header -->
+  <h1 class="text-3xl font-bold mb-6 text-black tracking-wider">Sellers Portal</h1>
+
+  <!-- Login and Signup Container -->
+  <div class="flex justify-center space-x-8 bg-white rounded-lg shadow-lg p-6">
+
+    <!-- Login Section -->
+    <div class="flex flex-col space-y-4 w-96 border-r-2 border-gray-300 pr-6">
+      <h2 class="text-2xl font-bold text-black">Login</h2>
+      <form action="/au/sellers/login" method="POST">
+        <div class="flex flex-col space-y-2">
+          <label for="email-login" class="text-sm font-medium text-gray-700">Email:</label>
+          <input class="p-2 border rounded-md bg-gray-50" type="text" id="email-login" name="email" />
         </div>
-        <div>
-          <label for="email-signup" class="block text-sm font-medium text-gray-700">Email:</label>
-          <!-- Add the name attribute -->
-          <input class="mt-1 p-2 w-full border rounded-md" type="text" id="email-signup" name="email" />
+        <div class="flex flex-col space-y-2">
+          <label for="password-login" class="text-sm font-medium text-gray-700">Password:</label>
+          <input class="p-2 border rounded-md bg-gray-50" type="password" id="password-login" name="password" />
         </div>
-        <div>
-          <label for="password-signup" class="block text-sm font-medium text-gray-700">Password:</label>
-          <!-- Add the name attribute -->
-          <input class="mt-1 p-2 w-full border rounded-md" type="password" id="password-signup" name="password" />
-        </div>
-        <div class="text-xs text-gray-500">
-          Password must be at least 8 characters long.
-        </div>
-        <div>
-          <button class="w-full bg-blue-500 text-black p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" type="submit">Signup</button>
-        </div>
+        <button class="mt-4 bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition duration-300"
+          type="submit">Login</button>
       </form>
-  </div>
+    </div>
 
-  
+    <!-- Signup Section -->
+    <div class="flex flex-col space-y-4 w-96 pl-6">
+      <h2 class="text-2xl font-bold text-black">Signup</h2>
+      <form action="/au/sellers/create" method="POST">
+        <div class="flex flex-col space-y-2">
+          <label for="username-signup" class="text-sm font-medium text-gray-700">Username:</label>
+          <input class="p-2 border rounded-md bg-gray-50" type="text" id="username-signup" name="username" />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="email-signup" class="text-sm font-medium text-gray-700">Email:</label>
+          <input class="p-2 border rounded-md bg-gray-50" type="text" id="email-signup" name="email" />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="password-signup" class="text-sm font-medium text-gray-700">Password:</label>
+          <input class="p-2 border rounded-md bg-gray-50" type="password" id="password-signup" name="password" />
+        </div>
+        <p class="text-xs text-gray-600 mt-2">Password must be at least 8 characters long.</p>
+        <button class="mt-4 bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition duration-300"
+          type="submit">Signup</button>
+      </form>
+    </div>
+
+  </div>
 </div>
