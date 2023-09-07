@@ -1,15 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+<body>
+<header class="flex justify-between mt-7 pb-7 bg-white px-4 py-2 shadow">
+    <div class="relative w-64 ml-16">
+        <input type="text" name="search" id="search" placeholder="What can we help you find?"
+            class="pl-10 pr-4 py-2 w-full border border-black">
+        <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Adding the Tailwind CSS link -->
-    <title>Seller Store</title>
-</head>
+    <div class="flex">
+        <a href="/" class="text-2xl font-semibold"><i class="fa-solid fa-shop fa-2xl"></i> | ShopSphere</a>
+    </div>
+    <div class="flex items-center">
+        <!-- User Profile Icon and Modal Trigger -->
 
-<body class="bg-gray-100">
+        <a href="/au/sellers/login"><i class="fa-solid fa-store fa-xl"></i></a>
+
+        <div class="relative group inline-block">
+            <a href="#" class="mx-10" id="profileIcon">
+                <i class="fa-solid fa-user fa-xl"></i>
+            </a>
+
+
+
+            <!-- The Login Modal -->
+            <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 hidden"
+                id="loginModal">
+                <div class="bg-white rounded-lg w-[735px] h-[547px] flex items-center relative justify-evenly">
+
+
+                    <!-- Sign In Section -->
+                    <div class="w-[277px] h-[478px] p-8">
+                        <h2 class="text-2xl mb-4">Sign In</h2>
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-sm mb-2" for="username">Email</label>
+                                <input type="text" id="username" name="username" class="border rounded w-full p-2">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm mb-2" for="password">Password</label>
+                                <input type="password" id="password" name="password" class="border rounded w-full p-2">
+                            </div>
+                            <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign
+                                In</button>
+                        </form>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="w-[2px] h-[305px] bg-gray-200"></div>
+
+                    <!-- Create Account Section -->
+                    <div class="w-[280px] h-[478px] p-8">
+                        <h2 class="text-2xl mb-4">Create Account</h2>
+                        <ul class="list-disc pl-5 mb-4 text-base">
+                            <li>Exclusive member-only deals</li>
+                            <li>Faster checkout process</li>
+                            <li>Save multiple shipping addresses</li>
+                            <li>Access to order history and tracking</li>
+                        </ul>
+                        <a href="#" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
+                    </div>
+
+                    <button id="closeModal" type="button" title="Close Popup" class="absolute top-4 right-4">
+                        <span class="sr-only">Close Popup</span>
+                        <i class="fa-solid fa-times text-2xl"></i>
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Group for dropdown -->
+        <div class="relative group inline-block">
+            <a href="" class="mr-16">
+                <i class="fa-solid fa-cart-shopping fa-xl"></i>
+            </a>
+
+            <!-- The dropdown content -->
+            <div
+                class="absolute right-0 top-full mt-0 w-64 bg-white border border-gray-300 rounded-lg shadow-xl z-10 hidden group-hover:block">
+                <div class="p-4">
+                    <p class="font-bold text-gray-700">Your Shopping Cart</p>
+                    <p class="text-sm text-gray-500 mt-2">Your cart is currently empty.</p>
+                </div>
+                <div class="border-t p-4">
+                    <a href="#" class="text-blue-500 text-sm hover:underline">View and Edit Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <div class="bg-black text-white">
+        <div class="container mx-auto py-2">
+            <nav class="flex space-x-6 overflow-x-auto scrollbar-hide justify-evenly">
+                <a href="/au/products/category/books" class="hover:text-gray-400">Books</a>
+                <a href="/au/products/category/Fashion" class="hover:text-gray-400">Fashion</a>
+                <a href="/au/products/category/electronics" class="hover:text-gray-400">Electronics</a>
+                <a href="/au/products/category/home" class="hover:text-gray-400">Home & Garden</a>
+                <a href="/au/products/category/Toys" class="hover:text-gray-400">Toys & Games</a>
+                <a href="/au/products/category/Fitness" class="hover:text-gray-400">Fitness & Outdoors</a>
+            </nav>
+        </div>
+    </div>
+</nav>
 
     <div class="container mx-auto mt-10">
             <h1 class="text-2xl font-bold mb-6">Products in {{seller.username}}</h1>

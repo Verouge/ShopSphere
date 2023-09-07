@@ -1,43 +1,178 @@
 <body>
-    <div class="container mx-auto mt-10 px-4">
-        <h1 class="text-3xl font-bold mb-8">{{product.name}}</h1>
-
-        <div class="md:flex md:items-start mb-6">
-            <div class="md:w-1/2">
-                <!-- Image Gallery  -->
-                <img class="w-full mb-4 rounded-lg" src="{{product.imageUrls.[0]}}" alt="{{product.name}}">
-
-                <div class="flex space-x-2 overflow-x-auto">
-                    {{#each product.imageUrls}}
-                    <a href="#" class="thumbnail-link" data-src="{{this}}">
-                        <img class="w-24 h-24 rounded-lg" src="{{this}}" alt="{{product.name}}">
-                    </a>
-                    {{/each}}
+    <header class="flex justify-between mt-7 pb-7 bg-white px-4 py-2 shadow">
+        <div class="relative w-64 ml-16">
+            <input type="text" name="search" id="search" placeholder="What can we help you find?"
+                class="pl-10 pr-4 py-2 w-full border border-black">
+            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+        </div>
+    
+        <div class="flex">
+            <a href="/" class="text-2xl font-semibold"><i class="fa-solid fa-shop fa-2xl"></i> | ShopSphere</a>
+        </div>
+        <div class="flex items-center">
+            <!-- User Profile Icon and Modal Trigger -->
+    
+            <a href="/au/sellers/login"><i class="fa-solid fa-store fa-xl"></i></a>
+    
+            <div class="relative group inline-block">
+                <a href="#" class="mx-10" id="profileIcon">
+                    <i class="fa-solid fa-user fa-xl"></i>
+                </a>
+    
+    
+    
+                <!-- The Login Modal -->
+                <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 hidden"
+                    id="loginModal">
+                    <div class="bg-white rounded-lg w-[735px] h-[547px] flex items-center relative justify-evenly">
+    
+    
+                        <!-- Sign In Section -->
+                        <div class="w-[277px] h-[478px] p-8">
+                            <h2 class="text-2xl mb-4">Sign In</h2>
+                            <form>
+                                <div class="mb-4">
+                                    <label class="block text-sm mb-2" for="username">Email</label>
+                                    <input type="text" id="username" name="username" class="border rounded w-full p-2">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm mb-2" for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="border rounded w-full p-2">
+                                </div>
+                                <button type="submit" class="bg-black text-white py-2 px-4 rounded block w-full">Sign
+                                    In</button>
+                            </form>
+                        </div>
+    
+                        <!-- Divider -->
+                        <div class="w-[2px] h-[305px] bg-gray-200"></div>
+    
+                        <!-- Create Account Section -->
+                        <div class="w-[280px] h-[478px] p-8">
+                            <h2 class="text-2xl mb-4">Create Account</h2>
+                            <ul class="list-disc pl-5 mb-4 text-base">
+                                <li>Exclusive member-only deals</li>
+                                <li>Faster checkout process</li>
+                                <li>Save multiple shipping addresses</li>
+                                <li>Access to order history and tracking</li>
+                            </ul>
+                            <a href="#" class="bg-black text-white py-2 px-4 rounded block w-full">Sign Up</a>
+                        </div>
+    
+                        <button id="closeModal" type="button" title="Close Popup" class="absolute top-4 right-4">
+                            <span class="sr-only">Close Popup</span>
+                            <i class="fa-solid fa-times text-2xl"></i>
+                        </button>
+    
+    
+                    </div>
                 </div>
             </div>
+    
+            <!-- Group for dropdown -->
+            <div class="relative group inline-block">
+                <a href="" class="mr-16">
+                    <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                </a>
+    
+                <!-- The dropdown content -->
+                <div
+                    class="absolute right-0 top-full mt-0 w-64 bg-white border border-gray-300 rounded-lg shadow-xl z-10 hidden group-hover:block">
+                    <div class="p-4">
+                        <p class="font-bold text-gray-700">Your Shopping Cart</p>
+                        <p class="text-sm text-gray-500 mt-2">Your cart is currently empty.</p>
+                    </div>
+                    <div class="border-t p-4">
+                        <a href="#" class="text-blue-500 text-sm hover:underline">View and Edit Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="bg-black text-white">
+            <div class="container mx-auto py-2">
+                <nav class="flex space-x-6 overflow-x-auto scrollbar-hide justify-evenly">
+                    <a href="/au/products/category/books" class="hover:text-gray-400">Books</a>
+                    <a href="/au/products/category/Fashion" class="hover:text-gray-400">Fashion</a>
+                    <a href="/au/products/category/electronics" class="hover:text-gray-400">Electronics</a>
+                    <a href="/au/products/category/home" class="hover:text-gray-400">Home & Garden</a>
+                    <a href="/au/products/category/Toys" class="hover:text-gray-400">Toys & Games</a>
+                    <a href="/au/products/category/Fitness" class="hover:text-gray-400">Fitness & Outdoors</a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+    
+<div class="container ml-16 mt-10 px-4 flex">
 
-            <div class="md:w-1/2 md:pl-8">
-                <p class="text-xl text-gray-600 mb-4">  <b>Price:</b> ${{product.price}}</p>
-                <p class="mb-2"> <b>Available:</b> {{product.quantity}} items </p>
-                <p class="mb-2 createdAt text-gray-600">Listed {{product.createdAt}} ago</p>
+    <!-- Image Section -->
+    <div class="flex flex-wrap md:flex-nowrap w-full md:w-2/3">
 
+        <!-- Vertical Gallery -->
+        <div class="md:w-1/4 flex flex-col space-y-2 overflow-y-auto mb-4 md:mb-0 mr-2"> <!-- Added mr-2 -->
+            {{#each product.imageUrls}}
+            <a href="#" class="thumbnail-link" data-src="{{this}}">
+                <img class="w-20 h-20 md:w-24 md:h-24 rounded-lg shadow-md" src="{{this}}" alt="{{product.name}}">
+            </a>
+            {{/each}}
+        </div>
 
-                <p class="mb-2"> <b>Visit Seller's Store:</b>
-                    <a href="/au/sellers/store/{{seller.id}}" class="text-blue-500 hover:underline">{{seller.username}}</a>
+        <!-- Main Product Image -->
+        <div class="flex-1 md:w-3/4">
+            <img id="mainImage" class="w-full rounded-lg shadow-lg" src="{{product.imageUrls.[0]}}" alt="{{product.name}}">
+        </div>
 
-                </p>
-                <p class="mb-2">Contact Seller: <a href="mailto:{{seller.email}}" class="text-gray-600 hover:underline">{{seller.email}}</a></p>
+    </div>
 
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full mt-4">
-                    Add to Cart
-                </button>
+    <!-- Product Info -->
+    <div class="ml-8 w-full md:w-1/3">
+        <h1 class="text-3xl font-bold mb-2 text-gray-900">{{product.name}}</h1>
+        <p class="text-2xl font-bold text-gray-800 mb-4">${{product.price}}</p>
+        <p class="mb-2 text-lg"><span class="font-bold">Available:</span> {{product.quantity}} items</p>
+        <p class="mb-2 text-lg createdAt text-gray-600"><span class="font-bold">Listed:</span>
+            {{product.createdAt}} ago</p>
+        <p class="mb-2 text-lg">
+            <span class="font-bold">Visit Seller's Store:</span>
+            <a href="/au/sellers/store/{{seller.id}}" class="text-gray-700 hover:underline">{{seller.username}}</a>
+        </p>
+        <p class="mb-4 text-lg">Contact Seller:
+            <a href="mailto:{{seller.email}}" class="text-gray-700 hover:underline">{{seller.email}}</a>
+        </p>
+
+        <!-- Add to Cart Section -->
+        <div class="flex items-center space-x-4 mt-4">
+            <button class="bg-black hover:bg-gray-800 text-white py-2 px-6 rounded">
+                Add to Cart
+            </button>
+            <div>
+                <p class="text-2xl font-bold text-gray-800 mb-2">${{product.price}}</p>
+                <select class="rounded border-gray-300 shadow-sm">
+                    {{#for quantity from 1 to product.quantity}}
+                    <option value="{{quantity}}">{{quantity}}</option>
+                    {{/for}}
+                </select>
             </div>
         </div>
 
-        <h2 class="text-2xl font-semibold mb-4">Product Description:</h2>
-        <p class="text-gray-700 leading-relaxed mb-8">{{product.description}}</p>
+        <!-- Dropdown for Product Description -->
+    <div class="mt-6">
+        <div class="border-t border-gray-300 bg-gray-100">
+            <button onclick="toggleDropdown()"
+                class="flex justify-between items-center py-3 px-4 w-full text-left font-medium text-black text-sm cursor-pointer focus:outline-none">
+                Product Description
+                <span id="dropdownIcon" class="text-xl">−</span>
+            </button>
+        </div>
+        <div id="productDescription" class="text-gray-800 leading-relaxed mb-8 text-sm pl-4 pr-8">
+            {{product.description}}
+        </div>
+    </div>
 
     </div>
+
+</div>
 </body>
 
 </html>
@@ -67,18 +202,16 @@
 
     return "just now";
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const mainImage = document.querySelector('.w-full');
-    const thumbnails = document.querySelectorAll('.thumbnail-link');
-
-    // Thumbnail click functionality
-    thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainImage.src = thumbnail.getAttribute('data-src');
+    document.addEventListener("DOMContentLoaded", function () {
+        const mainImage = document.getElementById('mainImage');
+        const thumbnails = document.querySelectorAll('.thumbnail-link');
+        // Thumbnail click functionality
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function (event) {
+                event.preventDefault();
+                mainImage.src = thumbnail.getAttribute('data-src');
+            });
         });
-    });
 
     // Time ago functionality
     const createdAtElement = document.querySelector('.createdAt');
@@ -86,6 +219,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const date = new Date(dateString);
     createdAtElement.textContent = "Listed: " + timeAgo(date);
 });
+
+   function toggleDropdown() {
+        const description = document.getElementById("productDescription");
+        const dropdownIcon = document.getElementById("dropdownIcon");
+
+        if (description.style.display === "none" || !description.style.display) {
+            description.style.display = "block";
+            dropdownIcon.textContent = '−';
+        } else {
+            description.style.display = "none";
+            dropdownIcon.textContent = '+';
+        }
+    }
 
 
 </script>
