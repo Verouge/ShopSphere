@@ -5,25 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Product Listing</title>
-    <!-- Add any additional headers or stylesheets you might be using -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-    <p>sellers listing</p>
-
     {{#if message}}
-    <div class="alert">
+    <div class="alert p-4 bg-red-500 text-white rounded-md mb-4">
         <p>{{message}}</p>
     </div>
     {{/if}}
 
     {{#if seller}}
-    <div class="seller-info">
-        <p>Seller Name: {{seller.username}}</p>
-        <p>Seller ID: {{seller.id}}</p>
+    <div class="seller-info p-4 bg-gray-100 border border-gray-300 rounded-md">
+        <p class="font-bold mb-2">Seller Name: <span class="font-normal">{{seller.username}}</span></p>
+        <p class="font-bold">Seller ID: <span class="font-normal">{{seller.id}}</span></p>
+        <a href="/au/sellers/dashboard/{{seller.id}}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-800">My Dashboard</a>
     </div>
     {{/if}}
+
 
     <form action="/au/products/listing" method="POST" enctype="multipart/form-data" class="space-y-4 p-8 bg-white shadow-md rounded-lg">
 
@@ -81,6 +82,54 @@
         </div>
 
     </form>
+    
+    <div id="successModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded p-4">
+                <h2 class="text-lg font-bold mb-2">Product successfully created!</h2>
+                <div class="space-y-2">
+                    <a href="/au/sellers/dashboard/{{seller.id}}" class="block bg-blue-500 text-white p-2 rounded text-center">View Listed Product</a>
+                    <a href="#" id="closeModalBtn" class="block bg-green-500 text-white p-2 rounded text-center">Add More Products</a>
+                    <a href="/" class="block bg-gray-500 text-white p-2 rounded text-center">Go to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let formData = new FormData(event.target);
+            
+            fetch("/au/products/listing", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Display the modal
+                    document.getElementById("successModal").classList.remove("hidden");
+                } else {
+                    // Handle error
+                    console.error("Error creating product");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+
+        document.getElementById("closeModalBtn").addEventListener("click", function(event) {
+        event.preventDefault();  
+        document.getElementById("successModal").classList.add("hidden");  // hide the modal
+    });
+
+
+
+    </script>
+
 
 </body>
 
