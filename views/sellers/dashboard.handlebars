@@ -1,24 +1,96 @@
-<header>
-    <h1>Welcome, {{ seller.username }}!</h1>
-</header>
-<nav>
-    <!-- put navigation in -->
-    <ul>
-        <li><a href="/sellers/products">My Products</a></li>
-        <li><a href="/sellers/orders">My Orders</a></li>
-        <li><a href="/sellers/profile">My Profile</a></li>
-        <li><a href="/sellers/logout">Logout</a></li>
-    </ul>
-</nav>
-<main>
-    <section>
-        <h2>Overview</h2>
-        <div>
-            <p>Recent Orders: {{ recentOrdersCount }}</p>
-            <p>Total Earnings: ${{ totalEarnings }}</p>
-        </div>
-    </section>
-    <!-- Further expantion -->
-</main>
-<footer>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product Listing</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <p class="text-2xl font-bold mb-4">Seller Dashboard</p>
+    {{#if message}}
+    <div class="alert bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+        <p>{{message}}</p>
+    </div>
+    {{/if}}
+    {{#if seller}}
+    <div class="seller-info bg-white p-6 rounded shadow-lg mb-6">
+        <p class="text-lg font-medium">Seller Name: <span class="text-gray-600">{{seller.username}}</span></p>
+        <p class="text-lg font-medium">Seller ID: <span class="text-gray-600" data-seller-id="{{seller.id}}">{{seller.id}}</span></p>
+    </div>
+    {{/if}}
+    <table class="min-w-full bg-white rounded-lg shadow-md">
+        <thead>
+            <tr>
+                <th class="py-4 px-6 bg-gray-300 text-left">Product ID</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Product Name</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Price ($)</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Quantity</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Image</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Update Listing</th>
+                <th class="py-4 px-6 bg-gray-300 text-left">Remove Listing</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr data-product-id="{{this.id}}" class="border-t hover:bg-gray-100">
+                <td class="py-4 px-6">{{this.id}}</td>
+                <td class="py-4 px-6" contenteditable="true">{{this.name}}</td>
+                <td class="py-4 px-6" contenteditable="true">{{this.price}}</td>
+                <td class="py-4 px-6" contenteditable="true">{{this.quantity}}</td>
+                <td class="py-2 px-3"><img src="{{this.imageUrls.[0]}}" alt="{{this.name}}" width="100"></td>
+                <td class="py-8 px-10">
+                    <button onclick="updateProduct({{this.id}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-.5 px-1 rounded">Save</button>
+                </td>
+                <td class="py-8 px-10">
+                    <button onclick="deleteProduct({{this.id}})" class="bg-blue-500 hover:bg-red-700 text-white font-bold text-sm py-.5 px-1 rounded">Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+<script>
+    function updateProduct(productId) {
+        const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+        const name = row.cells[1].innerText;
+        const price = parseFloat(row.cells[2].innerText);
+        const quantity = parseInt(row.cells[3].innerText);
+        if (quantity === 0) {
+            fetch(`/au/sellers/products/${productId}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    row.remove();
+                }
+            }).catch(err => {
+                console.error('Error deleting product:', err);
+            });
+        } else {
+            fetch(`/au/sellers/products/${productId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, price, quantity })
+            }).catch(err => {
+                console.error('Error updating product:', err);
+            });
+        }
+    }
+    function deleteProduct(productId) {
+        if (confirm('Delete functionality is not available at this time')) {
+            fetch(`/au/sellers/products/${productId}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+                    row.remove();
+                }
+            }).catch(err => {
+                console.error('Error deleting product:', err);
+            });
+        }
+    }
+</script>
+</body>
+</html>
