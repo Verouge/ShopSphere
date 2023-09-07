@@ -34,6 +34,7 @@ Welcome to ShopSphere, Our E-Commerce Platform, a next-generation online marketp
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [Getting Started](#getting-started)
   - [Installation & Local Development](#installation-&-local-development)
 - [Usage](#usage)
